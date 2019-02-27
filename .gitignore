@@ -1,6 +1,4 @@
 node_modules/
 coverage/
-public/
+public/dist/
 dist/
-!public/images/
-!public/index.html
