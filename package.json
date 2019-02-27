@@ -5,13 +5,18 @@
   "author": "Omoefe Dukuye",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js && babel server/index.js -d dist/",
+    "build-dev": "webpack --config webpack.dev.js",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "dev-server": "webpack-dev-server --config webpack.dev.js",
-    "test": "jest --config=jest.config.json"
+    "clear-build": "rm -rf public/bundle* && rm -rf public/styles*",
+    "heroku-postbuild": "npm run build",
+    "start": "node dist",
+    "start-dev": "npm run build-dev && babel-node server",
+    "test": "jest --config=jest.config.json",
+    "webpack-server": "webpack-dev-server --config webpack.dev.js"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-dates": "^18.4.1",
@@ -38,7 +43,6 @@
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
     "jest": "^24.1.0",
-    "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "normalize.css": "7.0.0",
