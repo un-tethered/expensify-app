@@ -13,3 +13,10 @@ export const filters2 = {
   startDate: moment(),
   endDate: moment().add(3, 'days')
 };
+
+export const filters3 = {
+  text: 'a',
+  sortBy: 'date',
+  startDate: undefined,
+  endDate: undefined
+};

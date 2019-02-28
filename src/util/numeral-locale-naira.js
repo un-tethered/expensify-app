@@ -11,9 +11,6 @@ numeral.register('locale', 'ng', {
       billion: 'Bn',
       trillion: 't'
   },
-  ordinal : function (number) {
-      return number === 1 ? 'er' : 'ème';
-  },
   currency: {
       symbol: '₦'
   }
