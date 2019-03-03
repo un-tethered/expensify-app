@@ -5,6 +5,7 @@ import {
   addExpense,
   editExpense,
   removeExpense,
+  startRemoveExpense,
   setExpenses,
   startSetExpenses
 } from '../../actions/expenses';
@@ -26,11 +27,33 @@ test('Should set up remove-expense action object', () => {
   expect(actionObject).toEqual({ id: 'baloney', type: 'REMOVE_EXPENSE' });
 });
 
-test('Should set up edit-expense action object', () => {
-  const actionObject = editExpense('baloney', { foo: 'bar' });
-  expect(actionObject).toEqual({
-    id: 'baloney', type: 'EDIT_EXPENSE', updates: { foo: 'bar' }
+test('Should remove expense from database and store', async () => {
+  const store = createMockStore({});
+  const [{ id, ...expense }] = expenses;
+  const snapshotBeforeRemoval = await database.ref(`expenses/${id}`).once('value');
+
+  expect(snapshotBeforeRemoval.val()).toEqual(expense);
+
+  await store.dispatch(startRemoveExpense(id));
+  const [action] = store.getActions();
+
+  expect(action).toEqual({
+    type: 'REMOVE_EXPENSE',
+    id
   });
+
+  const snapshotAfterRemoval = await database.ref(`expenses/${id}`).once('value');
+
+  expect(snapshotAfterRemoval.val()).toBe(null);
+});
+
+
+
+test('Should set up edit-expense action object', () => {
+const actionObject = editExpense('baloney', { foo: 'bar' });
+expect(actionObject).toEqual({
+  id: 'baloney', type: 'EDIT_EXPENSE', updates: { foo: 'bar' }
+});
 });
 
 test('Should set up add-expense action object with data supplied', () => {
@@ -85,6 +108,7 @@ test('Should add expense to database and store with default data', async () => {
 
   expect(firebaseItem.val()).toEqual(expenseData);
 });
+
 
 test('Should setup set expense action object with data', () => {
   const action = setExpenses(expenses);

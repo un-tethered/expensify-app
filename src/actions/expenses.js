@@ -15,6 +15,12 @@ export const startAddExpense = expenseData => async (dispatch) => {
 
 export const removeExpense = id => ({ type: 'REMOVE_EXPENSE', id });
 
+export const startRemoveExpense = id => async (dispatch) => {
+  await database.ref(`expenses/${id}`).remove();
+
+  return dispatch(removeExpense(id));
+};
+
 export const editExpense = (id, updates) => ({ type: 'EDIT_EXPENSE', id, updates });
 
 export const setExpenses = expenses => ({ type: 'SET_EXPENSES', expenses });
