@@ -16,3 +16,20 @@ export const startAddExpense = expenseData => async (dispatch) => {
 export const removeExpense = id => ({ type: 'REMOVE_EXPENSE', id });
 
 export const editExpense = (id, updates) => ({ type: 'EDIT_EXPENSE', id, updates });
+
+export const setExpenses = expenses => ({ type: 'SET_EXPENSES', expenses });
+
+export const startSetExpenses = () => async (dispatch) => {
+  const snapshot = await database.ref('expenses').once('value');
+
+  const expenses = [];
+
+  snapshot.forEach((childSnapshot) => {
+    expenses.push({
+      id: childSnapshot.key,
+      ...childSnapshot.val()
+    });
+  });
+  
+  return dispatch(setExpenses(expenses));
+};
