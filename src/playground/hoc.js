@@ -17,4 +17,4 @@ const higherOrderNigga = WrappedNigga => props => (
 
 const HigherNigga = higherOrderNigga(Info);
 
-ReactDOM.render(<HigherNigga info="She said is this an ocean? It's just a pool" />, document.getElementById('batistuta'));
+ReactDOM.render(<HigherNigga info="She said is this an ocean? It's just a pool" />, document.getElementById('app'));

@@ -1,5 +1,6 @@
 import '@babel/polyfill'
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/database';
 
 const config = {
@@ -14,5 +15,7 @@ const config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export { database as default, firebase };
+
+export { database as default, firebase, googleAuthProvider };

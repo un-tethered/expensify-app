@@ -13,11 +13,13 @@
     "start": "node dist",
     "start-dev": "npm run build-dev && babel-node server",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
-    "webpack-server": "webpack-dev-server --config webpack.dev.babel.js"
+    "test-watch": "npm run test -- --watchAll",
+    "dev-server": "webpack-dev-server --config webpack.dev.babel.js"
   },
   "dependencies": {
     "express": "^4.16.4",
     "firebase": "^5.8.5",
+    "history": "^4.7.2",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "react": "^16.7.0",
