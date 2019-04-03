@@ -4,16 +4,6 @@ import { ExpenseSummary } from '../../components/ExpenseSummary';
 import expenses from '../fixtures/expenses';
 import { filters } from '../fixtures/filters';
 
-test('Should render nothing for zero expenses', () => {
-  const props = {
-    expenses,
-    filters: { ...filters, text: 'foo bar' }
-  };
-  const wrapper = shallow(<ExpenseSummary {...props} />);
-
-  expect(wrapper.find('div').text()).toBe('');
-});
-
 test('Should render ExpenseSummary for plural expenses', () => {
   const props = {
     expenses,

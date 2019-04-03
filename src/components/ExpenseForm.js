@@ -75,27 +75,47 @@ export default class ExpenseForm extends Component {
       onSubmit,
     } = this;
     return (
-      <div>
-        {error && <p>{error}</p>}
-        <form onSubmit={onSubmit}>
-          <input type="text" placeholder="Description" onChange={onDescriptionChange} value={description} />
-          <input type="text" placeholder="Amount" value={amount} onChange={onAmountChange} />
-          <SingleDatePicker
-            date={createdAt}
-            onDateChange={onDateChange}
-            focused={calendarFocused}
-            onFocusChange={onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
-          <textarea
-            placeholder="Add note for your expense (Optional)"
-            onChange={onNoteChange}
-            value={note}
-          />
-          <button type="submit">{`${this.existingState() ? 'Edit' : 'Add'} Expense`}</button>
-        </form>
-      </div>
+      <form className="form" onSubmit={onSubmit}>
+        {error && <p className="form__error">{error}</p>}
+        <input
+          autoFocus
+          className="text-input"
+          onChange={onDescriptionChange}
+          placeholder="Description"
+          type="text"
+          value={description}
+        />
+
+        <input
+          className="text-input"
+          onChange={onAmountChange}
+          placeholder="Amount"
+          type="text"
+          value={amount}
+        />
+
+        <SingleDatePicker
+          date={createdAt}
+          onDateChange={onDateChange}
+          focused={calendarFocused}
+          onFocusChange={onFocusChange}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+        />
+
+        <textarea
+          className="textarea"
+          onChange={onNoteChange}
+          placeholder="Add note for your expense (Optional)"
+          value={note}
+        />
+
+        <div>
+          <button className="button" type="submit">
+            {`${this.existingState() ? 'Save' : 'Add'} Expense`}
+          </button>
+        </div>
+      </form>
     );
   }
 }
